@@ -22,9 +22,8 @@ Simple Selenium is a Python wrapper for Selenium that is intended to make browse
 
 This module is still in pre-alpha, so you may encounter bugs while using it. Please report any bugs to the GitHub repository: [https://github.com/aidens113/simpleSeleniumWrapper/issues](https://github.com/aidens113/simpleSeleniumWrapper/issues)
 
-{% hint style="danger" %}
-Simple Selenium wrapper is currently only compatible with Windows & Linux. Using this module on other operating systems may result in a substandard or error-prone experience.&#x20;
-{% endhint %}
+
+**Simple Selenium wrapper is currently only compatible with Windows & Linux. Using this module on other operating systems may result in a substandard or error-prone experience**
 
 ***
 
