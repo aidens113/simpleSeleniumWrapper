@@ -29,5 +29,13 @@ class Alerts:
         else:
             return self.alert.dismiss()
 
-    def write(self,string_to_type):
-        self.alert.send_keys(string_to_type)
+    def write(self,string_to_type,retry_if_fail=True,max_retries=5,delay_for_each_retry=1):
+        if retry_if_fail==True:
+            for _ in range(max_retries):
+                try:
+                    return self.alert.send_keys(string_to_type)
+                except:
+                    pass
+                time.sleep(delay_for_each_retry)
+        else:
+            return self.alert.send_keys(string_to_type)

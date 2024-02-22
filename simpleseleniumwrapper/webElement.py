@@ -13,14 +13,23 @@ class WebElement(ElementLocation):
         #Init ElementLocation class
         super().__init__(webElement,WebElement)
 
-        #Set basic selenium webelement attributes
-        self.accessible_name=webElement.accessible_name
-        self.aria_role=webElement.aria_role
-        self.id=webElement.id
-        self.parent=webElement.parent
-
 
     #------------------WRAPPED ATTRIBUTES--------------------
+    def accessible_name(self):
+        return self.webElement.accessible_name
+
+    def aria_role(self):
+        return self.webElement.aria_role
+
+    def id(self):
+        return self.webElement.id
+
+    def parent(self):
+        return self.webElement.parent
+
+    def tag_name(self):
+        return self.webElement.tag_name
+        
     def location(self):
         return self.webElement.location
 
@@ -38,7 +47,15 @@ class WebElement(ElementLocation):
 
     def innerHTML(self):
         return self.webElement.get_attribute('innerHTML')
-        
+
+    def displayed(self):
+        return self.webElement.is_displayed()
+
+    def enabled(self):
+        return self.webElement.is_enabled()
+
+    def selected(self):
+        return self.webElement.is_selected()
 
     #------------------BASIC SELENIUM WEBELEMENT FUNCTIONS-------------------
     def clear(self):
@@ -66,15 +83,6 @@ class WebElement(ElementLocation):
     def submit(self):
         return self.webElement.submit()
 
-    def displayed(self):
-        return self.webElement.is_displayed()
-
-    def enabled(self):
-        return self.webElement.is_enabled()
-
-    def selected(self):
-        return self.webElement.is_selected()
-
     def dom_attr(self,dom_attr):
         return self.webElement.get_dom_attribute(dom_attr)
 
@@ -91,7 +99,7 @@ class WebElement(ElementLocation):
     def all_attributes(self):
         return self.driver.execute_script('var finalAttrs={};var attrNames=arguments[0].getAttributeNames();for(var vv=0;vv<attrNames.length;vv++){var attrNameHere=attrNames[vv];finalAttrs[attrNameHere]=arguments[0].getAttribute(attrNameHere);}return finalAttrs;',self.webElement)
 
-    def parent(self):
+    def parent_element(self):
         return WebElement(self.driver.execute_script('return arguments[0].parentElement;',self.webElement))
 
     #------------------CUSTOM COMPLEX SIMPLE SELENIUM FUNCTIONS--------------------

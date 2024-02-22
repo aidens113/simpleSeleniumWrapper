@@ -21,6 +21,7 @@ class WebDriver (ElementLocation):
         webdriverName,
         headless=False,
         maximized=False,
+        custom_driver=None,
         custom_chrome_options=False,
         custom_firefox_options=False,
         firefox_binary_location=False,
@@ -65,11 +66,12 @@ class WebDriver (ElementLocation):
             logging.basicConfig(level=logging_level)
         
         #Set webdriver name for class
-        self.webdriverName=webdriverName
+        self.webdriverName=webdriverName.lower()
         
         #Get & set webdriver location through webdriver manager
-        webdriverLocation=WebdriverManager().installWebdriverIfNeededAndGetDownloadLocation(webdriverName)
-        self.webdriverExecutablePath=webdriverLocation
+        if custom_driver==None:
+            webdriverLocation=WebdriverManager().installWebdriverIfNeededAndGetDownloadLocation(webdriverName)
+            self.webdriverExecutablePath=webdriverLocation
 
         #Set OS
         thisOS=str(platform.system()).lower()
@@ -86,6 +88,7 @@ class WebDriver (ElementLocation):
         self.startupOptions={}
         self.startupOptions['headless']=headless
         self.startupOptions['maximized']=maximized
+        self.startupOptions['custom_driver']=custom_driver
         self.startupOptions['custom_chrome_options']=custom_chrome_options
         self.startupOptions['custom_firefox_options']=custom_firefox_options
         self.startupOptions['firefox_binary_location']=firefox_binary_location
@@ -196,7 +199,7 @@ class WebDriver (ElementLocation):
                 
             #Init chromedriver
             service=Service(self.webdriverExecutablePath)
-            if startupOptions['show_selenium_cmd']==True:
+            if startupOptions['show_selenium_cmd']==False:
                 service.creationflags = CREATE_NO_WINDOW #Hides cmd prompt that pops up
             driver=webdriver.Chrome(service=service,options=chrome_options)
 
@@ -295,6 +298,10 @@ class WebDriver (ElementLocation):
             #Return true to indicate successful webdriver start
             return True
 
+        if self.webdriverName=="custom":
+            #Gets custom driver object
+            driver=startupOptions['custom_driver']
+
         #Set driver
         self.driver=driver
 
@@ -360,7 +367,7 @@ class WebDriver (ElementLocation):
         return self.driver.switch_to.default_content()
 
     def focus_iframe(self,iframe):
-        return self.driver.switch_to.frame(iframe)
+        return self.driver.switch_to.frame(iframe.webElement)
 
     def focus_parent_iframe(self):
         return self.driver.switch_to.parent_frame()
@@ -432,9 +439,6 @@ class WebDriver (ElementLocation):
     def back(self):
         return self.driver.back()
 
-    def create_web_element(self,element_id):
-        return self.driver.create_web_element(element_id)
-
     def delete_all_cookies(self):
         return self.driver.delete_all_cookies()
 
@@ -447,14 +451,20 @@ class WebDriver (ElementLocation):
     def download_file(self,file_name,target_directory):
         return self.driver.download_file(file_name,target_directory)
 
-    def execute(self,driver_command,params=None):
-        return self.driver.execute(driver_command,params)
+    #def execute(self,driver_command,params=None):
+    #    return self.driver.execute(driver_command,params)
 
     def execute_async_script(self,script: str, *args):
-        return self.driver.execute_async_script(script,args)
+        theseWebElems=[]
+        for arg in args:
+            theseWebElems.append(arg.webElement)
+        return self.driver.execute_async_script(f"arguments=arguments[0];{script}",theseWebElems)
 
     def execute_script(self,script, *args):
-        return self.driver.execute_script(script,args)
+        theseWebElems=[]
+        for arg in args:
+            theseWebElems.append(arg.webElement)
+        return self.driver.execute_script(f"arguments=arguments[0];{script}",theseWebElems)
 
     def forward(self):
         return self.driver.forward()
@@ -523,13 +533,13 @@ class WebDriver (ElementLocation):
         return self.driver.set_script_timeout(time_to_wait)
 
     def set_user_verified(self,verified: bool):
-        return self.driver.set_user_verified(time_to_wait)
+        return self.driver.set_user_verified(verified)
 
     def set_window_position(self,x,y,windowHandle: str = 'current'):
         return self.driver.set_window_position(x,y,windowHandle)
 
-    def set_window_rect(self,x=None, y=None, width=None, height=None):
-        return self.driver.set_window_rect(x,y,width,height)
+    #def set_window_rect(self,x=None, y=None, width=None, height=None):
+    #    return self.driver.set_window_rect(x,y,width,height)
 
     def set_window_size(self,width, height, windowHandle: str = 'current'):
         return self.driver.set_window_size(width, height, windowHandle)

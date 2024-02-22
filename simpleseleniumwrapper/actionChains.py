@@ -1,7 +1,7 @@
 from .baseImports import *
 from .webElement import WebElement
 
-@for_all_methods(stop_driver_on_error)
+#@for_all_methods(stop_driver_on_error)
 class ActionChains:
     def __init__(self,actionChains):
         #Set actionchains root selenium object
@@ -103,19 +103,31 @@ class ActionChains:
         return ActionChains(thisChain)
 
     def click(self,on_element: WebElement | None = None):
-        return ActionChains(self.actionChains.click(on_element.webElement))
+        if on_element!=None:
+            return ActionChains(self.actionChains.click(on_element.webElement))
+        else:
+            return ActionChains(self.actionChains.click())
 
     def click_and_hold(self,on_element: WebElement | None = None):
-        return ActionChains(self.actionChains.click_and_hold(on_element.webElement))
+        if on_element!=None:
+            return ActionChains(self.actionChains.click_and_hold(on_element.webElement))
+        else:
+            return ActionChains(self.actionChains.click_and_hold())
 
     def context_click(self,on_element: WebElement | None = None):
-        return ActionChains(self.actionChains.context_click(on_element.webElement))
+        if on_element!=None:
+            return ActionChains(self.actionChains.context_click(on_element.webElement))
+        else:
+            return ActionChains(self.actionChains.context_click())
 
     def double_click(self,on_element: WebElement | None = None):
-        return ActionChains(self.actionChains.double_click(on_element.webElement))
+        if on_element!=None:
+            return ActionChains(self.actionChains.double_click(on_element.webElement))
+        else:
+            return ActionChains(self.actionChains.double_click())
 
     def drag_and_drop(self,source: WebElement, target: WebElement):
-        return ActionChains(self.actionChains.drag_and_drop(source.webElement,target))
+        return ActionChains(self.actionChains.drag_and_drop(source.webElement,target.webElement))
 
     def drag_and_drop_by_offset(self,source: WebElement, xoffset: int, yoffset: int):
         return ActionChains(self.actionChains.drag_and_drop_by_offset(source.webElement,xoffset,yoffset))
@@ -156,7 +168,10 @@ class ActionChains:
         return ActionChains(self.actionChains.move_to_element_with_offset(to_element.webElement,xoffset,yoffset))
 
     def release(self,on_element: WebElement | None = None):
-        return ActionChains(self.actionChains.release(on_element.webElement))
+        if on_element!=None:
+            return ActionChains(self.actionChains.release(on_element.webElement))
+        else:
+            return ActionChains(self.actionChains.release())
 
     def reset_actions(self):
         return ActionChains(self.actionChains.reset_actions())
@@ -167,13 +182,14 @@ class ActionChains:
     def scroll_to_element(self,element: WebElement):
         return ActionChains(self.actionChains.scroll_to_element(element.webElement))
 
-    def send_keys(self,*keys_to_send: str):
-        return ActionChains(self.actionChains.send_keys(keys_to_send))
+    #Not needed since it has same functionality as press_key
+    #def send_keys(self,*keys_to_send: str):
+    #    return ActionChains(self.actionChains.send_keys(keys_to_send))
 
-    def send_keys_to_element(self,element: WebElement, *keys_to_send: str):
-        return ActionChains(self.actionChains.send_keys_to_element(element.webElement,keys_to_send))
+    #def send_keys_to_element(self,element: WebElement, *keys_to_send: str):
+    #    return ActionChains(self.actionChains.send_keys_to_element(element.webElement,keys_to_send))
 
-    def pause(seconds: float | int):
+    def pause(self,seconds: float | int):
         return ActionChains(self.actionChains.pause(seconds))
 
     def perform(self):
