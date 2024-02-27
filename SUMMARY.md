@@ -14,10 +14,7 @@
 * [Handling Alerts](fundamentals-of-automation/handling-alerts.md)
 * [Running Undetected](fundamentals-of-automation/running-undetected.md)
 
-## ✏ Basic Examples
+## ✏️ Examples
 
-* [Super Simple Example](basic-examples/super-simple-example.md)
-
-## 🖊 Advanced Examples
-
-* [Untitled](advanced-examples/untitled.md)
+* [Grabbing Logo Text From E-Commerce Website](examples/super-simple-example.md)
+* [Google.com Get Number Of Search Results For Query](examples/google.com-get-number-of-search-results-for-query.md)

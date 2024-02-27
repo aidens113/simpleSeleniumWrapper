@@ -17,7 +17,7 @@ The WebDriver class contains all of the Simple Selenium functionality wrapped in
 You can get the unwrapped Selenium webdriver object with:
 
 ```python
-seleniumDriver=driver.driver #Returns base Selenium 
+seleniumDriver=driver.driver #Returns unwrapped Selenium webdriver object
 ```
 
 #### Close Driver

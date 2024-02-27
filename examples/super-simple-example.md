@@ -4,7 +4,7 @@ description: >-
   website.
 ---
 
-# Super Simple Example
+# Grabbing Logo Text From E-Commerce Website
 
 Let's say we want to locate the logo element of this test e-commerce website ([https://www.demoblaze.com/](https://www.demoblaze.com/)) and grab the "Product Store" text:
 
@@ -36,7 +36,7 @@ This should open the developer tools console. Get familiar with this, since you'
 
 Looking at the \<a> tag, we need to find a reliable attribute to consistently identify this product logo element. The class attribute looks promising, as it has a unique & human-readable value ("navbar-brand"), which is unlikely to change.
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 Now with Simple Selenium, you can use this class name ("navbar-brand") to locate the logo element:
 
