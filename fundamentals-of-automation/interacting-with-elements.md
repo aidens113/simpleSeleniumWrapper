@@ -242,7 +242,7 @@ Gets the current parent element of an element:
 #<div id="testElementParent"><p id="testElement">test</p></div>
 
 testElement=driver.by_id("testElement") #Grab some element on the page
-testElement.parentElement().id() #Returns "testElementParent" 
+testElement.parent_element().id() #Returns "testElementParent" 
 ```
 
 #### Screenshot

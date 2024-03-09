@@ -301,11 +301,11 @@ driver.execute_async_script("testElem=arguments[0];console.log(testElem);",testE
 Executes JS script:
 
 ```python
-driver.execute_async_script("js script to execute") #Executes JS script 
+driver.execute_script("js script to execute") #Executes JS script 
 
 testElem=driver.by_id("testElement")
 testElem2=driver.by_id("testElement2")
-driver.execute_async_script("testElem=arguments[0];console.log(testElem);",testElem,testElem2,etc) #Executes script with webelement(s) 
+driver.execute_script("testElem=arguments[0];console.log(testElem);",testElem,testElem2,etc) #Executes script with webelement(s) 
 ```
 
 #### Forward Page
