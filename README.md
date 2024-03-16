@@ -1,5 +1,4 @@
 ---
-description: Learn how to setup and use Simple Selenium with some basic examples
 layout:
   title:
     visible: true
